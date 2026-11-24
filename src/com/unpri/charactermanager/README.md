@@ -1,43 +1,90 @@
 
-# Character Manager — TP3 (Java Visual SIH-6406)
+# Character Manager
 
-## Deskripsi Project
+Aplikasi Java sederhana untuk mengelola data karakter menggunakan konsep Object-Oriented Programming (OOP).
 
-Character Manager merupakan aplikasi berbasis Java yang dibuat untuk menerapkan konsep Object-Oriented Programming (OOP). Project ini mengimplementasikan class, object, constructor, encapsulation, enum, getter, setter, dan method untuk mengelola karakter dalam sebuah game.
+## Identitas
 
-Pada Sprint #1, project dikembangkan dengan menambahkan atribut Mana, validasi nilai Mana, method `isAlive()`, serta fitur `levelUp()` untuk meningkatkan level karakter dan memperbarui statistiknya.
+- **Nama:** Alga Vancany Yunita Purba
+- **NIM:** [ISI NIM]
+- **Program Studi:** Sistem Informasi
+- **Universitas:** Universitas Prima Indonesia
+- **Mata Kuliah:** Java Visual
 
-## Fitur Utama
+---
 
-- Membuat karakter menggunakan constructor.
-- Menggunakan enum `CharacterType` untuk menentukan jenis karakter.
-- Encapsulation menggunakan atribut private.
-- Getter dan setter untuk mengakses serta mengubah data karakter.
-- Validasi level, hit points, attack power, dan mana.
-- Method `levelUp()` untuk meningkatkan level karakter.
-- Method `isAlive()` untuk memeriksa status hidup karakter.
-- Method `toString()` untuk menampilkan informasi karakter.
+# TP3 - Sprint #1
+## Build, Extend & Analyze Class Skeleton
 
-## Teknologi yang Digunakan
+### Deskripsi
+Membangun struktur dasar Character Manager menggunakan Java dengan menerapkan konsep class, object, constructor, encapsulation, dan enum.
 
-- Java Development Kit (JDK) 17
-- Visual Studio Code
-- Git dan GitHub
+### Fitur
+- Membuat objek Character.
+- Menggunakan CharacterType.
+- Mengatur atribut karakter melalui constructor dan setter.
+- Menghitung HP dan Attack Power berdasarkan level.
+- Menambahkan properti Mana.
+- Memeriksa status karakter menggunakan isAlive().
 
-## Screenshot Output Program
+### Screenshot
 
-### 1. Output Daftar Karakter
-
-![Output Daftar Karakter](screenshots/output-karakter.png)
-
-### 2. Output Mini-Challenge Mana dan isAlive()
+![Output Character](screenshots/output-karakter.png)
 
 ![Output Mini Challenge](screenshots/output-minichallenge.png)
 
-## Struktur Folder Project
+---
+
+# TP5 - Sprint #2
+## CharacterManager, Analytics & Object Reference
+
+### Deskripsi
+Mengembangkan aplikasi Character Manager dengan fitur pengelolaan data karakter, analisis data, serta pemahaman konsep object reference pada Java.
+
+### Fitur Utama
+
+1. **Add Character**
+   - Menambahkan karakter baru.
+   - Menolak karakter dengan nama duplikat.
+
+2. **Find Character**
+   - Mencari karakter berdasarkan nama.
+
+3. **Remove Character**
+   - Menghapus karakter berdasarkan nama.
+
+4. **Character Analytics**
+   - Menghitung jumlah karakter.
+   - Menghitung rata-rata level.
+   - Mencari karakter berdasarkan tipe.
+   - Menghitung jumlah karakter berdasarkan tipe.
+
+5. **Defensive Copy**
+   - Menggunakan salinan ArrayList agar perubahan pada daftar hasil tidak mengubah daftar internal CharacterManager.
+
+6. **Object Reference**
+   - Menguji hubungan dua variabel yang menunjuk objek yang sama.
+   - Menggunakan copy constructor untuk membuat objek independen.
+
+7. **Static Counter**
+   - Menghitung total objek Character yang telah dibuat.
+
+### Custom Feature: countByType()
+
+Method `countByType()` digunakan untuk menghitung jumlah karakter berdasarkan tipe tertentu.
+
+Fitur ini membantu pengguna mengetahui jumlah karakter Warrior, Mage, Archer, atau Assassin tanpa harus mengakses ArrayList internal secara langsung.
+
+Method ini juga menjaga prinsip encapsulation karena data internal tetap bersifat private.
+
+### Screenshot
+![alt text](<screenshots/OUTPUT TERMINAL SPRINT 2.png>)
+---
+
+## Struktur Project
 
 ```text
-CharacterManager/
+character_manager/
 │
 ├── src/
 │   └── com/
@@ -47,65 +94,39 @@ CharacterManager/
 │               │
 │               └── model/
 │                   ├── Character.java
+│                   ├── CharacterManager.java
 │                   └── CharacterType.java
 │
 ├── screenshots/
 │   ├── output-karakter.png
-│   └── output-minichallenge.png
+│   ├── output-minichallenge.png
+│   ├── tp5-crud.png
+│   ├── tp5-analytics.png
+│   ├── tp5-defensive-copy.png
+│   ├── tp5-reference.png
+│   └── tp5-static-counter.png
 │
 └── README.md
 ```
 
-## Contoh Implementasi Mini-Challenge
+---
 
-```java
-Character shadow = new Character(
-    "Shadow",
-    CharacterType.ASSASSIN,
-    6
-);
+## Teknologi
 
-shadow.setMana(150);
+- Java JDK 17
+- Visual Studio Code
+- Git
+- GitHub
 
-System.out.println(shadow.getMana());
-System.out.println(shadow.isAlive());
-```
+## Dokumentasi Analisis
 
-Output:
 
-```text
-150
-true
-```
-
-## Identitas Mahasiswa
-
-| Keterangan | Informasi |
-|---|---|
-| Nama | Alga Vancany Yunita Purba |
-| NIM | 253303621269 |
-| Program Studi | Sarjana Sistem Informasi |
-| Fakultas | Sains dan Teknologi |
-| Universitas | Universitas Prima Indonesia |
-| Mata Kuliah | Java Visual |
-| Kode Mata Kuliah | SIH-6406 |
-
-## Dokumentasi Analisis Desain
-
-Google Docs:
-
-[JavaVisual_TP03_2533036212_Alga Vancany Yunita(https://docs.google.com/document/d/1ZYXXrvSimTg-zZKCt7ZDSSMAazwRgTQa5tb1kKx1kJA/edit?usp=sharing))
-
-Dokumen tersebut berisi analisis ekosistem Java, konsep encapsulation, constructor, enum, diagram UML, dan refleksi desain berdasarkan implementasi Character Manager Sprint #1.
-
-## Author
-
-**Alga Vancany Yunita Purba**
-
-Universitas Prima Indonesia (UNPRI)
-
-Program Studi Sistem Informasi
+- **TP5:** [https://docs.google.com/document/d/1w-ZLNuCGWYLtGJEnl95HBE_sf676Owdr9LcjKeZFc3M/edit?usp=sharing ]
 
 ---
 
-*Character Manager Sprint #1 — Java Visual SIH-6406*
+## Author
+
+**Alga Vancany Yunita Purba**  
+Sistem Informasi  
+Universitas Prima Indonesia

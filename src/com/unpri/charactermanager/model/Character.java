@@ -1,7 +1,12 @@
+
 package com.unpri.charactermanager.model;
+
+import java.util.Locale;
+import java.util.Objects;
 
 public class Character {
 
+    // Character attributes
     private int id;
     private String name;
     private CharacterType type;
@@ -10,15 +15,21 @@ public class Character {
     private int attackPower;
     private int mana;
 
-    // Constructor 1: Membuat karakter baru
+    // Shared counter for all Character objects
+    private static int totalCharacterCreated = 0;
+
+    // Constructor for new character
     public Character(String name, CharacterType type, int level) {
-        this.name = name;
-        this.type = type;
+        setName(name);
+        setType(type);
         setLevel(level);
+
         this.mana = 0;
+
+        totalCharacterCreated++;
     }
 
-    // Constructor 2: Mengambil data karakter lengkap
+    // Constructor for complete character data
     public Character(
             int id,
             String name,
@@ -27,16 +38,28 @@ public class Character {
             int hitPoints,
             int attackPower
     ) {
+        this(name, type, level);
+
         this.id = id;
-        this.name = name;
-        this.type = type;
-        this.level = level;
-        this.hitPoints = hitPoints;
-        this.attackPower = attackPower;
-        this.mana = 0;
+        setHitPoints(hitPoints);
+        setAttackPower(attackPower);
     }
 
-    // Getter dan Setter ID
+    // Copy constructor
+    public Character(Character other) {
+        this(
+                other.id,
+                other.name,
+                other.type,
+                other.level,
+                other.hitPoints,
+                other.attackPower
+        );
+
+        this.mana = other.mana;
+    }
+
+    // ID getter and setter
     public int getId() {
         return id;
     }
@@ -45,25 +68,34 @@ public class Character {
         this.id = id;
     }
 
-    // Getter dan Setter Name
+    // Name getter and setter
     public String getName() {
         return name;
     }
 
     public void setName(String name) {
-        this.name = name;
+        if (name == null || name.trim().isEmpty()) {
+            throw new IllegalArgumentException(
+                    "Name cannot be empty."
+            );
+        }
+
+        this.name = name.trim();
     }
 
-    // Getter dan Setter Type
+    // Type getter and setter
     public CharacterType getType() {
         return type;
     }
 
     public void setType(CharacterType type) {
-        this.type = type;
+        this.type = Objects.requireNonNull(
+                type,
+                "Character type cannot be null."
+        );
     }
 
-    // Getter dan Setter Level
+    // Level getter and setter
     public int getLevel() {
         return level;
     }
@@ -71,7 +103,7 @@ public class Character {
     public void setLevel(int level) {
         if (level < 1) {
             throw new IllegalArgumentException(
-                    "Level harus minimal 1."
+                    "Level must be at least 1."
             );
         }
 
@@ -80,7 +112,7 @@ public class Character {
         this.attackPower = level * 10;
     }
 
-    // Getter dan Setter Hit Points
+    // Hit points getter and setter
     public int getHitPoints() {
         return hitPoints;
     }
@@ -88,14 +120,14 @@ public class Character {
     public void setHitPoints(int hitPoints) {
         if (hitPoints < 0) {
             throw new IllegalArgumentException(
-                    "Hit points tidak boleh negatif."
+                    "Hit points cannot be negative."
             );
         }
 
         this.hitPoints = hitPoints;
     }
 
-    // Getter dan Setter Attack Power
+    // Attack power getter and setter
     public int getAttackPower() {
         return attackPower;
     }
@@ -103,14 +135,14 @@ public class Character {
     public void setAttackPower(int attackPower) {
         if (attackPower < 0) {
             throw new IllegalArgumentException(
-                    "Attack power tidak boleh negatif."
+                    "Attack power cannot be negative."
             );
         }
 
         this.attackPower = attackPower;
     }
 
-    // Mini-Challenge: Getter dan Setter Mana
+    // Mana getter and setter
     public int getMana() {
         return mana;
     }
@@ -118,24 +150,51 @@ public class Character {
     public void setMana(int mana) {
         if (mana < 0) {
             throw new IllegalArgumentException(
-                    "Mana tidak boleh negatif."
+                    "Mana cannot be negative."
             );
         }
 
         this.mana = mana;
     }
 
-    // Mini-Challenge: Memeriksa status karakter
+    // Check character status
     public boolean isAlive() {
         return hitPoints > 0;
     }
 
-    // Menaikkan level karakter
+    // Increase character level
     public void levelUp() {
         setLevel(level + 1);
     }
 
-    // Menampilkan informasi karakter
+    // Get total created Character objects
+    public static int getTotalCharacterCreated() {
+        return totalCharacterCreated;
+    }
+
+    // Compare characters by name
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+
+        if (!(obj instanceof Character)) {
+            return false;
+        }
+
+        Character other = (Character) obj;
+
+        return name.equalsIgnoreCase(other.name);
+    }
+
+    // Generate hash code based on name
+    @Override
+    public int hashCode() {
+        return name.toLowerCase(Locale.ROOT).hashCode();
+    }
+
+    // Display character information
     @Override
     public String toString() {
         return "Character{" +
