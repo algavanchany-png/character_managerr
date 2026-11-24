@@ -1,21 +1,19 @@
 
 # Character Manager
 
-**Java Visual - Universitas Prima Indonesia (UNPRI)**
-
-Project ini merupakan pengembangan aplikasi Character Manager menggunakan bahasa pemrograman Java dan Java Swing.
+Java Visual - Universitas Prima Indonesia (UNPRI)
 
 ## Informasi Project
 
 | Keterangan | Detail |
 |---|---|
 | Project | Character Manager |
-| Sprint | Sprint #3 |
-| Tugas | TP8 - AP10 |
+| Sprint | Sprint #4 |
+| Tugas | TP10 - AP13 |
 | Mata Kuliah | Java Visual |
-| Bahasa | Java |
+| Bahasa Pemrograman | Java |
 | GUI Framework | Java Swing |
-| Konsep | OOP, MVC, Event-Driven Programming |
+| Konsep | OOP, MVC, GUI Theming |
 
 ## Struktur Project
 
@@ -29,77 +27,120 @@ CharacterManager/
 │       │   ├── CharacterType.java
 │       │   └── CharacterManager.java
 │       └── view/
+│           ├── AppTheme.java
 │           └── MainWindow.java
 ├── screenshots/
-│   ├── TP8-Before.png
-│   └── TP8-After.png
+│   ├── TP10-Before.png
+│   └── TP10-After.png
 └── README.md
 ```
 
-## TP8 - Character Manager Sprint #3
+---
 
-### MainWindow, Data Dinamis & Analisis MVC
+# TP8 - Character Manager Sprint #3
 
-Pada sprint ini, aplikasi Character Manager dikembangkan dari program berbasis console menjadi aplikasi berbasis Graphical User Interface (GUI) menggunakan Java Swing.
+## MainWindow, Data Dinamis & Analisis MVC
 
-### Fitur Implementasi
+Pada Sprint #3, aplikasi Character Manager dikembangkan dari program console menjadi aplikasi GUI menggunakan Java Swing.
 
-- MainWindow menggunakan JFrame.
-- Menampilkan data karakter secara dinamis menggunakan perulangan.
-- Menggunakan JPanel untuk menampilkan kartu karakter.
-- Menggunakan JScrollPane untuk daftar karakter.
-- Menampilkan jumlah karakter.
-- Menghitung statistik rata-rata level karakter.
-- Menggunakan SwingUtilities.invokeLater() untuk menjalankan GUI.
+Fitur yang diterapkan:
+- JFrame sebagai jendela utama.
+- JPanel untuk menampilkan karakter.
+- JScrollPane untuk daftar karakter.
+- Data karakter ditampilkan secara dinamis menggunakan perulangan.
+- Statistik jumlah karakter dan rata-rata level.
+- SwingUtilities.invokeLater() untuk menjalankan GUI.
+
+### Alur Data MVC
+
+Main.java membuat objek CharacterManager dan menambahkan data karakter. CharacterManager berfungsi sebagai Model yang mengelola kumpulan data. MainWindow berfungsi sebagai View yang mengambil data dari Model dan menampilkannya kepada pengguna. Pemisahan ini membuat pengelolaan data dan tampilan aplikasi menjadi lebih terstruktur.
+
+---
+
+# TP10 - Character Manager Sprint #4
+
+## Theming, Properti Komponen & Analisis MVC
+
+### Deskripsi
+
+Pada Sprint #4, aplikasi Character Manager dikembangkan dengan menerapkan sistem tema menggunakan AppTheme.java.
+
+Tujuannya adalah memisahkan pengaturan tampilan dari logika pengelolaan data agar aplikasi lebih konsisten, mudah dikembangkan, dan memiliki struktur kode yang lebih baik.
+
+### A. Implementasi Tema
+
+File AppTheme.java digunakan untuk menyimpan pengaturan tampilan aplikasi, meliputi:
+
+- Warna background utama.
+- Warna teks.
+- Warna berdasarkan role karakter.
+- Font judul dan informasi.
+- Border komponen.
+- Pemetaan warna menggunakan method colorFor().
+
+MainWindow menggunakan AppTheme sebagai pusat pengaturan tampilan tanpa mendefinisikan warna dan font secara langsung.
+
+### B. Mini-Challenge
+
+Karakter dengan level minimal 5 mendapatkan teks berwarna emas dan tebal.
+
+Batas level disimpan dalam konstanta:
+
+`HIGH_LEVEL_THRESHOLD = 5`
 
 ### Daftar Karakter
 
-| Nama | Tipe | Level | Alasan Pemilihan |
-|---|---|---:|---|
-| Arthur | WARRIOR | 5 | Karakter petarung dengan level menengah. |
-| Merlin | MAGE | 3 | Karakter penyihir dengan level awal. |
-| Robin | ARCHER | 4 | Karakter pemanah dengan kemampuan seimbang. |
-| Morgana | MAGE | 6 | Karakter penyihir dengan level lebih tinggi. |
-| Athena | ARCHER | 7 | Karakter pemanah dengan level tinggi. |
+| Nama | Role | Level |
+|---|---|---:|
+| Arthur | WARRIOR | 5 |
+| Gatotkaca | WARRIOR | 7 |
+| Merlin | MAGE | 3 |
+| Morgana | MAGE | 6 |
+| Robin | ARCHER | 4 |
+| Shadow | ASSASSIN | 1 |
 
-### Statistik Karakter
+### Dua Properti Tambahan
 
-Jumlah karakter: 5
+**1. Tooltip**
 
-Total level: 25
+Menggunakan setToolTipText() untuk menampilkan informasi detail karakter, termasuk nama, role, HP, dan Attack Power ketika kursor diarahkan ke kartu karakter.
 
-Rata-rata level: 5.00
+Alasan: memudahkan pengguna memperoleh informasi tambahan tanpa memenuhi tampilan utama dengan terlalu banyak teks.
 
-Rumus:
+**2. Border berdasarkan Role**
 
-Rata-rata Level = Total Level / Jumlah Karakter
+Setiap kartu karakter menggunakan border dengan warna yang disesuaikan dengan role melalui method borderFor().
 
-### Screenshot Aplikasi
+Alasan: memudahkan pengguna membedakan kategori karakter secara visual dan membuat tampilan lebih konsisten.
 
-#### Sebelum Perubahan Data
+### C. Screenshot Aplikasi
 
-![TP8 Before](src/com/unpri/charactermanager/screenshots/TERMINAL OUTPUT SPRINT 3 BEFORE.png)
+#### Before - MainWindow v0.3
 
-#### Sesudah Perubahan Data
+Versi sebelum penerapan AppTheme.
 
-![TP8 After](src/com/unpri/charactermanager/screenshots/TERMINAL OUTPUT SPRINT 3 AFTER.png)
+![TP10 Before](screenshots/OUTPUT SPRINT 4 V.04.png)
 
-### Analisis Aliran Data dan MVC
+#### After - MainWindow v0.4
 
-Aliran data aplikasi dimulai dari Main.java yang membuat objek CharacterManager dan menambahkan data karakter menggunakan method addCharacter(). Selanjutnya, objek CharacterManager menyimpan dan mengelola kumpulan data karakter. MainWindow menerima objek CharacterManager melalui constructor, kemudian mengambil data menggunakan getAllCharacters() dan menampilkannya secara dinamis menggunakan perulangan. Dengan konsep MVC, CharacterManager berperan sebagai bagian Model yang mengelola data, sedangkan MainWindow berperan sebagai View yang bertanggung jawab menampilkan informasi kepada pengguna.
+Versi sesudah penerapan AppTheme, role-based color, dan highlight level tinggi.
 
-### Konsep Event-Driven Programming
+![TP10 After](screenshots/V.03.png)
 
-Aplikasi GUI menggunakan pendekatan event-driven programming. Berbeda dengan program console yang menjalankan instruksi secara berurutan, aplikasi GUI dapat menunggu interaksi pengguna atau event tertentu untuk menjalankan proses.
+### D. Mengapa Warna Disimpan di AppTheme?
 
-### Google Docs - Analisis GUI & MVC
+Warna disimpan di AppTheme karena pengaturan tampilan merupakan tanggung jawab View dalam konsep MVC. Character sebagai Model seharusnya hanya menyimpan informasi dan karakteristik data, seperti nama, role, level, HP, dan Attack Power. Jika warna disimpan di dalam Character, Model akan bergantung pada komponen presentasi sehingga pemisahan tanggung jawab menjadi kurang baik. Dengan AppTheme, perubahan tampilan dapat dilakukan tanpa mengubah struktur Model dan aturan pengelolaan data.
 
-Dokumentasi analisis Bagian D:
+### E. Google Docs - Analisis Properti & MVC
 
-[Java Visual TP8 - Analisis GUI & MVC](https://docs.google.com/document/d/1Hj7ydaICSuB1yNE1RJtG0xxb4lDeT7WdjJKfeLuvxrA/edit?usp=sharing  )
+Dokumentasi analisis TP10:
+
+[Java Visual TP10 - Analisis Properti & MVC https://docs.google.com/document/d/1iKdJJd23U-3HRd0__CXKbo0j7XV7Vrr-E0DKajIQWiY/edit?tab=t.0#heading=h.o7l3pu3awiw7 )
 
 ---
 
 ## Kesimpulan
 
-TP8 berhasil mengembangkan Character Manager dari aplikasi console menjadi aplikasi GUI menggunakan Java Swing. Implementasi ini menerapkan konsep OOP, pemisahan Model dan View, data dinamis, serta penghitungan statistik karakter.
+Sprint #4 mengembangkan tampilan Character Manager menggunakan sistem tema terpusat melalui AppTheme. Implementasi ini menerapkan pemisahan tanggung jawab antara Model dan View, pemetaan warna berdasarkan role, penggunaan logical font, serta pengaturan properti komponen Swing.
+
+Aplikasi sekarang memiliki tampilan yang lebih konsisten, mudah dikembangkan, dan lebih terstruktur.

@@ -1,4 +1,3 @@
-
 package com.unpri.charactermanager;
 
 import com.unpri.charactermanager.model.Character;
@@ -14,9 +13,12 @@ public class Main {
 
         CharacterManager manager = new CharacterManager();
 
-        // Initial character data
+        // ==============================
+        // SAMPLE CHARACTERS
+        // ==============================
+
         manager.addCharacter(
-                new Character("Arthur", CharacterType.WARRIOR, 5)
+                new Character("Arjuna", CharacterType.WARRIOR, 5)
         );
 
         manager.addCharacter(
@@ -24,34 +26,30 @@ public class Main {
         );
 
         manager.addCharacter(
-                new Character("Robin", CharacterType.ARCHER, 4)
+                new Character("Athena", CharacterType.ARCHER, 4)
         );
 
         manager.addCharacter(
-                new Character("Morgana", CharacterType.MAGE, 6)
+                new Character("Gatotkaca", CharacterType.WARRIOR, 7)
         );
 
         manager.addCharacter(
-                new Character("Athena", CharacterType.ARCHER, 7)
-        
+                new Character("Morgana", CharacterType.MAGE, 1)
         );
+
         manager.addCharacter(
-    new Character("Morgana", CharacterType.MAGE, 6)
-);
+                new Character("Robin Hood", CharacterType.ARCHER, 6)
+        );
 
-manager.addCharacter(
-    new Character("Athena", CharacterType.ARCHER, 7)
-);
+        // ==============================
+        // RUN APPLICATION
+        // ==============================
 
-        // Run GUI on Event Dispatch Thread
         SwingUtilities.invokeLater(() -> {
 
             MainWindow window = new MainWindow(manager);
 
-            window.pack();
-            window.setLocationRelativeTo(null);
             window.setVisible(true);
-
         });
     }
 }
