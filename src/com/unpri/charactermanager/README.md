@@ -1,132 +1,105 @@
 
 # Character Manager
 
-Aplikasi Java sederhana untuk mengelola data karakter menggunakan konsep Object-Oriented Programming (OOP).
+**Java Visual - Universitas Prima Indonesia (UNPRI)**
 
-## Identitas
+Project ini merupakan pengembangan aplikasi Character Manager menggunakan bahasa pemrograman Java dan Java Swing.
 
-- **Nama:** Alga Vancany Yunita Purba
-- **NIM:** [ISI NIM]
-- **Program Studi:** Sistem Informasi
-- **Universitas:** Universitas Prima Indonesia
-- **Mata Kuliah:** Java Visual
+## Informasi Project
 
----
-
-# TP3 - Sprint #1
-## Build, Extend & Analyze Class Skeleton
-
-### Deskripsi
-Membangun struktur dasar Character Manager menggunakan Java dengan menerapkan konsep class, object, constructor, encapsulation, dan enum.
-
-### Fitur
-- Membuat objek Character.
-- Menggunakan CharacterType.
-- Mengatur atribut karakter melalui constructor dan setter.
-- Menghitung HP dan Attack Power berdasarkan level.
-- Menambahkan properti Mana.
-- Memeriksa status karakter menggunakan isAlive().
-
-### Screenshot
-
-![Output Character](screenshots/output-karakter.png)
-
-![Output Mini Challenge](screenshots/output-minichallenge.png)
-
----
-
-# TP5 - Sprint #2
-## CharacterManager, Analytics & Object Reference
-
-### Deskripsi
-Mengembangkan aplikasi Character Manager dengan fitur pengelolaan data karakter, analisis data, serta pemahaman konsep object reference pada Java.
-
-### Fitur Utama
-
-1. **Add Character**
-   - Menambahkan karakter baru.
-   - Menolak karakter dengan nama duplikat.
-
-2. **Find Character**
-   - Mencari karakter berdasarkan nama.
-
-3. **Remove Character**
-   - Menghapus karakter berdasarkan nama.
-
-4. **Character Analytics**
-   - Menghitung jumlah karakter.
-   - Menghitung rata-rata level.
-   - Mencari karakter berdasarkan tipe.
-   - Menghitung jumlah karakter berdasarkan tipe.
-
-5. **Defensive Copy**
-   - Menggunakan salinan ArrayList agar perubahan pada daftar hasil tidak mengubah daftar internal CharacterManager.
-
-6. **Object Reference**
-   - Menguji hubungan dua variabel yang menunjuk objek yang sama.
-   - Menggunakan copy constructor untuk membuat objek independen.
-
-7. **Static Counter**
-   - Menghitung total objek Character yang telah dibuat.
-
-### Custom Feature: countByType()
-
-Method `countByType()` digunakan untuk menghitung jumlah karakter berdasarkan tipe tertentu.
-
-Fitur ini membantu pengguna mengetahui jumlah karakter Warrior, Mage, Archer, atau Assassin tanpa harus mengakses ArrayList internal secara langsung.
-
-Method ini juga menjaga prinsip encapsulation karena data internal tetap bersifat private.
-
-### Screenshot
-![alt text](<screenshots/OUTPUT TERMINAL SPRINT 2.png>)
----
+| Keterangan | Detail |
+|---|---|
+| Project | Character Manager |
+| Sprint | Sprint #3 |
+| Tugas | TP8 - AP10 |
+| Mata Kuliah | Java Visual |
+| Bahasa | Java |
+| GUI Framework | Java Swing |
+| Konsep | OOP, MVC, Event-Driven Programming |
 
 ## Struktur Project
 
 ```text
-character_manager/
-│
+CharacterManager/
 ├── src/
-│   └── com/
-│       └── unpri/
-│           └── charactermanager/
-│               ├── Main.java
-│               │
-│               └── model/
-│                   ├── Character.java
-│                   ├── CharacterManager.java
-│                   └── CharacterType.java
-│
+│   └── com/unpri/charactermanager/
+│       ├── Main.java
+│       ├── model/
+│       │   ├── Character.java
+│       │   ├── CharacterType.java
+│       │   └── CharacterManager.java
+│       └── view/
+│           └── MainWindow.java
 ├── screenshots/
-│   ├── output-karakter.png
-│   ├── output-minichallenge.png
-│   ├── tp5-crud.png
-│   ├── tp5-analytics.png
-│   ├── tp5-defensive-copy.png
-│   ├── tp5-reference.png
-│   └── tp5-static-counter.png
-│
+│   ├── TP8-Before.png
+│   └── TP8-After.png
 └── README.md
 ```
 
+## TP8 - Character Manager Sprint #3
+
+### MainWindow, Data Dinamis & Analisis MVC
+
+Pada sprint ini, aplikasi Character Manager dikembangkan dari program berbasis console menjadi aplikasi berbasis Graphical User Interface (GUI) menggunakan Java Swing.
+
+### Fitur Implementasi
+
+- MainWindow menggunakan JFrame.
+- Menampilkan data karakter secara dinamis menggunakan perulangan.
+- Menggunakan JPanel untuk menampilkan kartu karakter.
+- Menggunakan JScrollPane untuk daftar karakter.
+- Menampilkan jumlah karakter.
+- Menghitung statistik rata-rata level karakter.
+- Menggunakan SwingUtilities.invokeLater() untuk menjalankan GUI.
+
+### Daftar Karakter
+
+| Nama | Tipe | Level | Alasan Pemilihan |
+|---|---|---:|---|
+| Arthur | WARRIOR | 5 | Karakter petarung dengan level menengah. |
+| Merlin | MAGE | 3 | Karakter penyihir dengan level awal. |
+| Robin | ARCHER | 4 | Karakter pemanah dengan kemampuan seimbang. |
+| Morgana | MAGE | 6 | Karakter penyihir dengan level lebih tinggi. |
+| Athena | ARCHER | 7 | Karakter pemanah dengan level tinggi. |
+
+### Statistik Karakter
+
+Jumlah karakter: 5
+
+Total level: 25
+
+Rata-rata level: 5.00
+
+Rumus:
+
+Rata-rata Level = Total Level / Jumlah Karakter
+
+### Screenshot Aplikasi
+
+#### Sebelum Perubahan Data
+
+![TP8 Before](src/com/unpri/charactermanager/screenshots/TERMINAL OUTPUT SPRINT 3 BEFORE.png)
+
+#### Sesudah Perubahan Data
+
+![TP8 After](src/com/unpri/charactermanager/screenshots/TERMINAL OUTPUT SPRINT 3 AFTER.png)
+
+### Analisis Aliran Data dan MVC
+
+Aliran data aplikasi dimulai dari Main.java yang membuat objek CharacterManager dan menambahkan data karakter menggunakan method addCharacter(). Selanjutnya, objek CharacterManager menyimpan dan mengelola kumpulan data karakter. MainWindow menerima objek CharacterManager melalui constructor, kemudian mengambil data menggunakan getAllCharacters() dan menampilkannya secara dinamis menggunakan perulangan. Dengan konsep MVC, CharacterManager berperan sebagai bagian Model yang mengelola data, sedangkan MainWindow berperan sebagai View yang bertanggung jawab menampilkan informasi kepada pengguna.
+
+### Konsep Event-Driven Programming
+
+Aplikasi GUI menggunakan pendekatan event-driven programming. Berbeda dengan program console yang menjalankan instruksi secara berurutan, aplikasi GUI dapat menunggu interaksi pengguna atau event tertentu untuk menjalankan proses.
+
+### Google Docs - Analisis GUI & MVC
+
+Dokumentasi analisis Bagian D:
+
+[Java Visual TP8 - Analisis GUI & MVC](https://docs.google.com/document/d/1Hj7ydaICSuB1yNE1RJtG0xxb4lDeT7WdjJKfeLuvxrA/edit?usp=sharing  )
+
 ---
 
-## Teknologi
+## Kesimpulan
 
-- Java JDK 17
-- Visual Studio Code
-- Git
-- GitHub
-
-## Dokumentasi Analisis
-
-
-- **TP5:** [https://docs.google.com/document/d/1w-ZLNuCGWYLtGJEnl95HBE_sf676Owdr9LcjKeZFc3M/edit?usp=sharing ]
-
----
-
-## Author
-
-**Alga Vancany Yunita Purba**  
-Sistem Informasi  
-Universitas Prima Indonesia
+TP8 berhasil mengembangkan Character Manager dari aplikasi console menjadi aplikasi GUI menggunakan Java Swing. Implementasi ini menerapkan konsep OOP, pemisahan Model dan View, data dinamis, serta penghitungan statistik karakter.
