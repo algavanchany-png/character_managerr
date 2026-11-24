@@ -1,146 +1,81 @@
+# TP12 - Character Manager Sprint #5
 
-# Character Manager
+## Layout, UI Responsif & Analisis MVC
 
-Java Visual - Universitas Prima Indonesia (UNPRI)
+### 1. Deskripsi
 
-## Informasi Project
+Pada Sprint #5, aplikasi Character Manager dikembangkan
+dengan menggunakan BorderLayout, BoxLayout, GridLayout,
+dan JScrollPane.
 
-| Keterangan | Detail |
-|---|---|
-| Project | Character Manager |
-| Sprint | Sprint #4 |
-| Tugas | TP10 - AP13 |
-| Mata Kuliah | Java Visual |
-| Bahasa Pemrograman | Java |
-| GUI Framework | Java Swing |
-| Konsep | OOP, MVC, GUI Theming |
+Tujuan pengembangan ini adalah membuat tampilan aplikasi
+lebih responsif ketika ukuran jendela berubah.
 
-## Struktur Project
+### 2. Implementasi Layout
 
-```text
-CharacterManager/
-├── src/
-│   └── com/unpri/charactermanager/
-│       ├── Main.java
-│       ├── model/
-│       │   ├── Character.java
-│       │   ├── CharacterType.java
-│       │   └── CharacterManager.java
-│       └── view/
-│           ├── AppTheme.java
-│           └── MainWindow.java
-├── screenshots/
-│   ├── TP10-Before.png
-│   └── TP10-After.png
-└── README.md
-```
+Aplikasi menggunakan empat wilayah BorderLayout:
 
----
+| Wilayah | Komponen | Fungsi |
+|---|---|---|
+| NORTH | Header dan statistik | Menampilkan judul dan statistik karakter |
+| CENTER | JScrollPane | Menampilkan daftar karakter |
+| EAST | Legend Panel | Menjelaskan warna berdasarkan role |
+| SOUTH | Status Bar | Menampilkan status dan versi aplikasi |
 
-# TP8 - Character Manager Sprint #3
+### 3. Panel Tambahan
 
-## MainWindow, Data Dinamis & Analisis MVC
+Panel statistik menggunakan GridLayout(2, 2).
 
-Pada Sprint #3, aplikasi Character Manager dikembangkan dari program console menjadi aplikasi GUI menggunakan Java Swing.
+Layout ini dipilih karena informasi statistik terdiri
+dari empat bagian yang perlu ditampilkan secara teratur
+dalam dua baris dan dua kolom.
 
-Fitur yang diterapkan:
-- JFrame sebagai jendela utama.
-- JPanel untuk menampilkan karakter.
-- JScrollPane untuk daftar karakter.
-- Data karakter ditampilkan secara dinamis menggunakan perulangan.
-- Statistik jumlah karakter dan rata-rata level.
-- SwingUtilities.invokeLater() untuk menjalankan GUI.
+FlowLayout tidak dipilih karena posisi komponennya
+mengikuti aliran horizontal dan dapat berpindah baris
+ketika ruang tersedia berubah.
 
-### Alur Data MVC
+### 4. Struktur Panel Bersarang
 
-Main.java membuat objek CharacterManager dan menambahkan data karakter. CharacterManager berfungsi sebagai Model yang mengelola kumpulan data. MainWindow berfungsi sebagai View yang mengambil data dari Model dan menampilkannya kepada pengguna. Pemisahan ini membuat pengelolaan data dan tampilan aplikasi menjadi lebih terstruktur.
+MainPanel menjadi container utama aplikasi.
 
----
+HeaderPanel berisi judul dan StatisticsPanel.
+CharacterPanel berada di dalam ListWrapper yang
+kemudian dimasukkan ke JScrollPane.
+LegendPanel berada di EAST, sedangkan StatusPanel
+berada di SOUTH.
 
-# TP10 - Character Manager Sprint #4
+Struktur ini memisahkan setiap bagian antarmuka
+agar lebih mudah dikembangkan.
 
-## Theming, Properti Komponen & Analisis MVC
+### 5. Wireframe
 
-### Deskripsi
+Sisipkan gambar wireframe aplikasi di sini.
 
-Pada Sprint #4, aplikasi Character Manager dikembangkan dengan menerapkan sistem tema menggunakan AppTheme.java.
+### 6. Pengujian Responsive Layout
 
-Tujuannya adalah memisahkan pengaturan tampilan dari logika pengelolaan data agar aplikasi lebih konsisten, mudah dikembangkan, dan memiliki struktur kode yang lebih baik.
+![alt text](<../../../../screenshots/TERMINAL OUTPUT SPRINT 5.png>)
 
-### A. Implementasi Tema
+### 7. Tabel Pengamatan Resize
 
-File AppTheme.java digunakan untuk menyimpan pengaturan tampilan aplikasi, meliputi:
+| Pengujian | Prediksi | Hasil |
+|---|---|---|
+| Ukuran awal | Semua panel terlihat | Isi panel tampil |
+| Jendela diperlebar | Area CENTER bertambah luas | Kartu mendapat ruang lebih luas |
+| Jendela diperkecil | Scrollbar muncul jika konten tidak muat | Scrollbar vertikal muncul |
 
-- Warna background utama.
-- Warna teks.
-- Warna berdasarkan role karakter.
-- Font judul dan informasi.
-- Border komponen.
-- Pemetaan warna menggunakan method colorFor().
+### 8. Analisis MVC
 
-MainWindow menggunakan AppTheme sebagai pusat pengaturan tampilan tanpa mendefinisikan warna dan font secara langsung.
+Pengaturan layout berada di package View karena
+layout merupakan bagian dari presentasi antarmuka.
 
-### B. Mini-Challenge
+Model tetap mengelola data karakter dan aturan bisnis.
+View mengatur bagaimana data tersebut ditampilkan.
 
-Karakter dengan level minimal 5 mendapatkan teks berwarna emas dan tebal.
+Pemisahan ini membuat aplikasi lebih fleksibel
+dan mudah dikembangkan.
 
-Batas level disimpan dalam konstanta:
+### 9. Google Docs
 
-`HIGH_LEVEL_THRESHOLD = 5`
+Link Analisis TP12:
 
-### Daftar Karakter
-
-| Nama | Role | Level |
-|---|---|---:|
-| Arthur | WARRIOR | 5 |
-| Gatotkaca | WARRIOR | 7 |
-| Merlin | MAGE | 3 |
-| Morgana | MAGE | 6 |
-| Robin | ARCHER | 4 |
-| Shadow | ASSASSIN | 1 |
-
-### Dua Properti Tambahan
-
-**1. Tooltip**
-
-Menggunakan setToolTipText() untuk menampilkan informasi detail karakter, termasuk nama, role, HP, dan Attack Power ketika kursor diarahkan ke kartu karakter.
-
-Alasan: memudahkan pengguna memperoleh informasi tambahan tanpa memenuhi tampilan utama dengan terlalu banyak teks.
-
-**2. Border berdasarkan Role**
-
-Setiap kartu karakter menggunakan border dengan warna yang disesuaikan dengan role melalui method borderFor().
-
-Alasan: memudahkan pengguna membedakan kategori karakter secara visual dan membuat tampilan lebih konsisten.
-
-### C. Screenshot Aplikasi
-
-#### Before - MainWindow v0.3
-
-Versi sebelum penerapan AppTheme.
-
-![TP10 Before](screenshots/OUTPUT SPRINT 4 V.04.png)
-
-#### After - MainWindow v0.4
-
-Versi sesudah penerapan AppTheme, role-based color, dan highlight level tinggi.
-
-![TP10 After](screenshots/V.03.png)
-
-### D. Mengapa Warna Disimpan di AppTheme?
-
-Warna disimpan di AppTheme karena pengaturan tampilan merupakan tanggung jawab View dalam konsep MVC. Character sebagai Model seharusnya hanya menyimpan informasi dan karakteristik data, seperti nama, role, level, HP, dan Attack Power. Jika warna disimpan di dalam Character, Model akan bergantung pada komponen presentasi sehingga pemisahan tanggung jawab menjadi kurang baik. Dengan AppTheme, perubahan tampilan dapat dilakukan tanpa mengubah struktur Model dan aturan pengelolaan data.
-
-### E. Google Docs - Analisis Properti & MVC
-
-Dokumentasi analisis TP10:
-
-[Java Visual TP10 - Analisis Properti & MVC https://docs.google.com/document/d/1iKdJJd23U-3HRd0__CXKbo0j7XV7Vrr-E0DKajIQWiY/edit?tab=t.0#heading=h.o7l3pu3awiw7 )
-
----
-
-## Kesimpulan
-
-Sprint #4 mengembangkan tampilan Character Manager menggunakan sistem tema terpusat melalui AppTheme. Implementasi ini menerapkan pemisahan tanggung jawab antara Model dan View, pemetaan warna berdasarkan role, penggunaan logical font, serta pengaturan properti komponen Swing.
-
-Aplikasi sekarang memiliki tampilan yang lebih konsisten, mudah dikembangkan, dan lebih terstruktur.
+[(https://docs.google.com/document/d/1Kxv-E4ZcHrXY8oa1qOW9hKyvnrYYd0IZRMDx6knVnew/edit?tab=t.0)]

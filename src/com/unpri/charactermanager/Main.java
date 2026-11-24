@@ -6,6 +6,8 @@ import com.unpri.charactermanager.model.CharacterType;
 import com.unpri.charactermanager.view.MainWindow;
 
 import javax.swing.SwingUtilities;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Main {
 
@@ -13,43 +15,55 @@ public class Main {
 
         CharacterManager manager = new CharacterManager();
 
-        // ==============================
-        // SAMPLE CHARACTERS
-        // ==============================
+        List<Character> characters = new ArrayList<>();
 
-        manager.addCharacter(
-                new Character("Arjuna", CharacterType.WARRIOR, 5)
-        );
+        // =====================================
+        // SAMPLE CHARACTER DATA
+        // =====================================
 
-        manager.addCharacter(
-                new Character("Merlin", CharacterType.MAGE, 3)
-        );
+        addCharacter(manager, characters,
+                new Character("Arjuna", CharacterType.WARRIOR, 5));
 
-        manager.addCharacter(
-                new Character("Athena", CharacterType.ARCHER, 4)
-        );
+        addCharacter(manager, characters,
+                new Character("Merlin", CharacterType.MAGE, 3));
 
-        manager.addCharacter(
-                new Character("Gatotkaca", CharacterType.WARRIOR, 7)
-        );
+        addCharacter(manager, characters,
+                new Character("Athena", CharacterType.ARCHER, 4));
 
-        manager.addCharacter(
-                new Character("Morgana", CharacterType.MAGE, 1)
-        );
+        addCharacter(manager, characters,
+                new Character("Gatotkaca", CharacterType.WARRIOR, 7));
 
-        manager.addCharacter(
-                new Character("Robin Hood", CharacterType.ARCHER, 6)
-        );
+        addCharacter(manager, characters,
+                new Character("Morgana", CharacterType.MAGE, 1));
 
-        // ==============================
+        addCharacter(manager, characters,
+                new Character("Robin Hood", CharacterType.ARCHER, 6));
+
+        addCharacter(manager, characters,
+                new Character("Leonidas", CharacterType.WARRIOR, 9));
+
+        addCharacter(manager, characters,
+                new Character("Luna", CharacterType.MAGE, 2));
+
+        // =====================================
         // RUN APPLICATION
-        // ==============================
+        // =====================================
 
         SwingUtilities.invokeLater(() -> {
 
-            MainWindow window = new MainWindow(manager);
+            MainWindow window = new MainWindow(characters);
 
             window.setVisible(true);
         });
+    }
+
+    private static void addCharacter(
+            CharacterManager manager,
+            List<Character> characters,
+            Character character
+    ) {
+
+        manager.addCharacter(character);
+        characters.add(character);
     }
 }
